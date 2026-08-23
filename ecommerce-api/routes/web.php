@@ -8,10 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// admin panel ke sare routes /admin se start honge
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('products', ProductAdminController::class);
-    Route::get('/orders', [OrderAdminController::class, 'index'])->name('admin.orders.index');
-    Route::patch('/orders/{order}/accept', [OrderAdminController::class, 'accept'])->name('admin.orders.accept');
-    Route::patch('/orders/{order}/deny', [OrderAdminController::class, 'deny'])->name('admin.orders.deny');
+    Route::get('/orders', [OrderAdminController::class, 'index'])->name('orders.index');
+    Route::patch('/orders/{order}/accept', [OrderAdminController::class, 'accept'])->name('orders.accept');
+    Route::patch('/orders/{order}/deny', [OrderAdminController::class, 'deny'])->name('orders.deny');
 });
