@@ -29,11 +29,15 @@ export function AuthProvider({ children }) {
 
     // logout krne ka function
     const logout = async () => {
+    try {
         await api.post('/logout');
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setUser(null);
-    };
+    } catch (err) {
+        // token already invalid ho sakta h, koi baat nahi - phir bhi local state clear kr denge
+    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+};
 
     return (
         <AuthContext.Provider value={{ user, register, login, logout }}>
